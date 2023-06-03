@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "angular-portfolio-fc735": {
+      "hosting": {
+        "angular-portfolio": [
+          "angular-portfolio-fc735"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "angular-portfolio-fc735"
+  }
+}
