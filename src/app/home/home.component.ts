@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ChartData } from 'chart.js';
 
 export interface PeriodicElement {
   name: string;
@@ -28,4 +29,43 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class HomeComponent {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = ELEMENT_DATA;
+
+  lineChartData: ChartData <'bar', {key: string, value: number} []> = {
+    datasets: [{
+      data: [
+        {key: 'Jan', value: 20}, 
+        {key: 'Feb', value: 10},
+        {key: 'Mar', value: 40}, 
+        {key: 'Apr', value: 50},
+        {key: 'May', value: 70}, 
+        {key: 'Jun', value: 60},
+      ],
+      parsing: {
+        xAxisKey: 'key',
+        yAxisKey: 'value'
+      }
+    }],
+  };
+
+  lineChartOptions = {
+    scales: {
+      x: {
+        ticks:{
+          color: 'white',
+        },
+      },
+      y: {
+        ticks: {
+          color: 'white',
+        },
+      },
+    },
+    plugins: {
+      legend: {
+        labels:{
+          color: 'white',
+        }
+      }
+    }
+  }
 }

@@ -17,6 +17,7 @@ import { routes } from './routes';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTableModule} from '@angular/material/table';
 import {MatCardModule} from '@angular/material/card';
+import { NgChartsModule } from 'ng2-charts';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +35,7 @@ import {MatCardModule} from '@angular/material/card';
     MatToolbarModule,
     MatTableModule,
     MatCardModule,
+    NgChartsModule,
   ],
   providers: [
     ScreenTrackingService,UserTrackingService
