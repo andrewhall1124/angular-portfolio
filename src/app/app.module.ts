@@ -12,12 +12,16 @@ import { provideDatabase,getDatabase } from '@angular/fire/database';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { RouterModule } from '@angular/router';
 import { routes } from './routes';
+import { NgChartsModule } from 'ng2-charts';
 
 //Material
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTableModule} from '@angular/material/table';
 import {MatCardModule} from '@angular/material/card';
-import { NgChartsModule } from 'ng2-charts';
+import {MatButtonModule} from '@angular/material/button';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
+import {MatInputModule} from '@angular/material/input';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,6 +40,10 @@ import { NgChartsModule } from 'ng2-charts';
     MatTableModule,
     MatCardModule,
     NgChartsModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
   ],
   providers: [
     ScreenTrackingService,UserTrackingService
