@@ -4,12 +4,20 @@
 <div class="mt-4 w-full px-6 flex gap-4">
   <mat-form-field color="accent" class="w-full">
     <mat-label>Search stocks...</mat-label>
-    <input matInput>
+    <input 
+    matInput
+    [formControl]="myControl"
+    [matAutocomplete]="auto">
   </mat-form-field>
+  <mat-autocomplete #auto="matAutocomplete">
+    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+      {{option}}
+    </mat-option>
+  </mat-autocomplete>
   <button mat-raised-button color="accent" class="w-48">Save Portfolio</button>
 </div>
 
-<button mat-raised-button  class="mx-6">Open Dialog</button>
+<button mat-raised-button  class="mx-6" (click)="openStockDialog()">Open Dialog</button>
 
 <!-- Table -->
 <div class="flex w-full justify-around px-6 py-4 gap-4 flex-col md:flex-row">
