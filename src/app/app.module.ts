@@ -28,11 +28,13 @@ import {MatDialogModule} from '@angular/material/dialog';
 
 //Components
 import { StockDialogComponent } from './stock-dialog/stock-dialog.component';
+import { StockChartComponent } from './stock-chart/stock-chart.component';
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     StockDialogComponent,
+    StockChartComponent,
   ],
   imports: [
     BrowserModule,

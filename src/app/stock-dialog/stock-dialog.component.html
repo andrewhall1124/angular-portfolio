@@ -1,15 +1,24 @@
-<mat-card class="my-card h-full flex flex-col">
+<mat-card class="white h-full flex flex-col">
   <mat-card-header>
-    <h1>
-      AAPL
-    </h1>
+    <div class="flex justify-between w-full">
+      <h1>
+        {{(stockData | async).ticker}} | {{(stockData | async).longName}}
+      </h1>
+      <button mat-raised-button color="accent" class="w-40" mat-dialog-close>Add Stock</button>
+    </div>
   </mat-card-header>
-  <mat-card-content class="flex-1">
-    Apple Inc. (Apple) designs, manufactures and markets smartphones, personal computers, tablets, wearables and accessories and sells a range of related services. The Company's products include iPhone, Mac, iPad, AirPods, Apple TV, Apple Watch, Beats products, HomePod, iPod touch and accessories.
+  <mat-card-content class="overflow-auto">
+    <div class="flex w-full justify-around gap-2 flex-col md:flex-row">
+    <!-- left side -->
+    <mat-card class="text-white w-full min-w-[50%] p-2">
+      <h2>Company Summary</h2>
+      {{(stockData | async).summary}} 
+    </mat-card>
+    <!-- right side -->
+    <mat-card class="white w-full min-w-[50%]">
+      <app-stock-chart [data]="(stockData | async).ticker"></app-stock-chart>
+    </mat-card>
+    </div>
+    <br>
   </mat-card-content>
-  <mat-card-footer>
-    <mat-card-actions class="justify-end items-end">
-      <button mat-raised-button color="accent" class="w-40">Add Stock</button>
-    </mat-card-actions>
-  </mat-card-footer>
 </mat-card>

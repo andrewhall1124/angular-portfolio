@@ -1,6 +1,6 @@
 import { Component, inject, OnInit, Renderer2  } from '@angular/core';
 import { ChartData } from 'chart.js';
-import { CollectionReference, Firestore, collection, collectionData } from '@angular/fire/firestore';
+import { CollectionReference, Firestore, collection, collectionData, docData, doc, DocumentReference } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
@@ -15,7 +15,7 @@ import { StockDialogComponent } from '../stock-dialog/stock-dialog.component';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  displayedColumns: string[] = ['ticker', 'company name', 'sector', 'industry', 'average return', 'standard deviation'];
+  displayedColumns: string[] = ['ticker', 'company name', 'sector', 'industry'];
   fs: Firestore = inject(Firestore);
   stockData: any; //consider making this Stock[]
   stockDataCollection: CollectionReference = collection(this.fs, 'stock data');
@@ -28,27 +28,34 @@ export class HomeComponent {
     private renderer: Renderer2,
     ){
     this.stockData = collectionData(this.stockDataCollection);
-
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value || '')),
     );
-  }
+  };
 
   openStockDialog(){
-    const dialogRef = this.dialog.open(StockDialogComponent,{
-      height: '95vh',
-      width: '100vw',
-    });
-
-    dialogRef.afterOpened().subscribe(() => {
-      this.renderer.addClass(document.body, 'no-scroll');
-    });
-  }
+    const input = this.myControl.value;
+    if(input) {
+      const stock: string = input.toUpperCase();
+      console.log(stock);
+      if(sp500.includes(stock)){
+        const dialogRef = this.dialog.open(StockDialogComponent,{
+          height: '85vh',
+          width: 'auto',
+          data: {
+            stock: stock,
+          },
+      });
+      dialogRef.afterOpened().subscribe(() => {
+        this.renderer.addClass(document.body, 'no-scroll');
+      });
+      };
+    }
+  };
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
-
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
 
