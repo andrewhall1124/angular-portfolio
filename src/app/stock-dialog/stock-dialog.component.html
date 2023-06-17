@@ -4,7 +4,7 @@
       <h1>
         {{(stockData | async).ticker}} | {{(stockData | async).longName}}
       </h1>
-      <button mat-raised-button color="accent" class="w-40" mat-dialog-close>Add Stock</button>
+      <button mat-raised-button color="accent" class="w-40" (click)="addToPortfolio()" mat-dialog-close>Add Stock</button>
     </div>
   </mat-card-header>
   <mat-card-content class="overflow-auto">

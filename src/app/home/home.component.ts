@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
 import { sp500 } from './sp';
-import {MatDialog, MatDialogRef, MatDialogModule} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { StockDialogComponent } from '../stock-dialog/stock-dialog.component';
 import { Auth, GoogleAuthProvider, signInWithPopup, authState, signOut } from '@angular/fire/auth';
 @Component({
@@ -14,7 +14,7 @@ import { Auth, GoogleAuthProvider, signInWithPopup, authState, signOut } from '@
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  displayedColumns: string[] = ['ticker', 'company name', 'sector', 'industry'];
+  displayedColumns: string[] = ['ticker','weight'];
   fs: Firestore = inject(Firestore);
   auth: Auth = inject(Auth);
   stockData: any; //consider making this Stock[]
@@ -24,33 +24,33 @@ export class HomeComponent {
   filteredOptions: Observable<string[]>;
   user: any;
   userCollection: CollectionReference = collection(this.fs, 'users');
-  userPortfolioReference?: DocumentReference;
   userPortfolio: any;
+  userPortfolioReference?: CollectionReference;
 
   constructor(
     public dialog: MatDialog,
     private renderer: Renderer2,
-    ){
-      authState(this.auth).subscribe(user =>{
-        if(user){
-          this.user = user;
-          setDoc(doc(this.fs, `users/${this.user.uid}`), {
-            displayName: user.displayName,
-            uid: user.uid,
-            email: user.email,
-          });
-          this.userPortfolioReference = doc(this.fs, `{users/${this.user.uid}}`);
-          this.userPortfolio = docData(this.userPortfolioReference);
-        } else{
-          this.user = null;
-        };
-      });
+  ){
+    authState(this.auth).subscribe(user =>{
+      if(user){
+        this.user = user;
+        setDoc(doc(this.fs, `users/${this.user.uid}`), {
+          displayName: user.displayName!,
+          uid: user.uid,
+          email: user.email,
+        });
+        this.userPortfolioReference = collection(this.fs, `users/${this.user.uid}/portfolios/My Portfolio/stocks`);
+        this.userPortfolio = collectionData(this.userPortfolioReference);
+      } else{
+        this.user = null;
+      };
+    });
 
-      this.stockData = collectionData(this.stockDataCollection);
-      this.filteredOptions = this.myControl.valueChanges.pipe(
-        startWith(''),
-        map(value => this._filter(value || '')),
-      );
+    this.stockData = collectionData(this.stockDataCollection);
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value || '')),
+    );
   };
 
   logIn(){
@@ -69,13 +69,13 @@ export class HomeComponent {
     const input = this.myControl.value;
     if(input) {
       const stock: string = input.toUpperCase();
-      console.log(stock);
       if(sp500.includes(stock)){
         const dialogRef = this.dialog.open(StockDialogComponent,{
           height: '85vh',
           width: 'auto',
           data: {
             stock: stock,
+            user: this.user.uid,
           },
       });
       dialogRef.afterOpened().subscribe(() => {
@@ -90,7 +90,7 @@ export class HomeComponent {
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
 
-  lineChartData: ChartData <'bar', {key: string, value: number} []> = {
+  lineChartData: ChartData <'line', {key: string, value: number} []> = {
     datasets: [{
       data: [
         {key: 'Jan', value: 20}, 
