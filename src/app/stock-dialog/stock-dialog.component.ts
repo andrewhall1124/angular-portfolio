@@ -1,5 +1,5 @@
 import { Component, Inject, ViewEncapsulation, inject } from '@angular/core';
-import { DocumentReference, Firestore, doc, docData, setDoc } from '@angular/fire/firestore';
+import { DocumentData, DocumentReference, Firestore, doc, docData, setDoc } from '@angular/fire/firestore';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 @Component({
@@ -9,9 +9,9 @@ import { Observable } from 'rxjs';
   encapsulation: ViewEncapsulation.None,
 })
 export class StockDialogComponent {
-  stockReference: DocumentReference = doc(this.fs, `stock data/${this.data.stock}`);
+  stockReference: DocumentReference = doc(this.fs, `stock data/${this.data.ticker}`);
   stockData: Observable<any>;
-  portfolioName: string = 'My Portfolio';
+  portfolioName: string = 'My Portfolio'; //temporary
 
   constructor(
       @Inject(MAT_DIALOG_DATA) public data: any,
@@ -22,8 +22,8 @@ export class StockDialogComponent {
     };
 
   addToPortfolio(){
-    setDoc(doc(this.fs, `users/${this.data.user}/portfolios/${this.portfolioName}/stocks/${this.data.stock}`), {
-      ticker: this.data.stock,
+    setDoc(doc(this.fs, `users/${this.data.user}/portfolios/${this.portfolioName}/stocks/${this.data.ticker}`), {
+      ticker: this.data.ticker,
       weight: .2,
     });
   };
