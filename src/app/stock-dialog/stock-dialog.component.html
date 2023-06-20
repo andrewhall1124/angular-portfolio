@@ -1,4 +1,4 @@
-<mat-card class="white h-full flex flex-col">
+<mat-card class="h-full flex flex-col">
   <mat-card-header>
     <div class="flex justify-between w-full">
       <h1>
@@ -10,12 +10,12 @@
   <mat-card-content class="overflow-auto">
     <div class="flex w-full justify-around gap-2 flex-col md:flex-row">
     <!-- left side -->
-    <mat-card class="text-white w-full min-w-[50%] p-2">
+    <mat-card class="w-full min-w-[50%] p-2">
       <h2>Company Summary</h2>
       {{(stockData | async).summary}} 
     </mat-card>
     <!-- right side -->
-    <mat-card class="white w-full min-w-[50%]">
+    <mat-card class="w-full min-w-[50%]">
       <app-stock-chart [data]="(stockData | async).ticker"></app-stock-chart>
     </mat-card>
     </div>

@@ -60,25 +60,7 @@ export class StockChartComponent implements OnChanges{
   };
 
   lineChartOptions = {
-    scales: {
-      x: {
-        ticks:{
-          color: 'white',
-        },
-      },
-      y: {
-        ticks: {
-          color: 'white',
-        },
-      },
-    },
     plugins: {
-      responsive: true,
-      legend: {
-        labels:{
-          color: 'white',
-        }
-      },
       tooltip: {
         enabled: false,
       },
