@@ -1,6 +1,6 @@
-import { Component, inject, Renderer2, OnInit  } from '@angular/core';
+import { Component, inject, Renderer2, OnInit, ViewChild  } from '@angular/core';
 import { ChartData } from 'chart.js';
-import { CollectionReference, Firestore, collection, collectionData, doc, setDoc, DocumentData } from '@angular/fire/firestore';
+import { CollectionReference, Firestore, collection, collectionData, doc, docData, setDoc, DocumentData } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
@@ -10,13 +10,15 @@ import { MatDialog } from '@angular/material/dialog';
 import { StockDialogComponent } from '../stock-dialog/stock-dialog.component';
 import { Auth, GoogleAuthProvider, signInWithPopup, authState, signOut } from '@angular/fire/auth';
 import { Stock } from '../models/models';
+import { MatTable } from '@angular/material/table';
+import { MathService } from './services/math.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  displayedColumns: string[] = ['ticker','weight', 'company name', 'sector', 'industry'];
+  displayedColumns: string[] = ['ticker', 'company name', 'sector', 'industry', 'risk', 'return','weight'];
   fs: Firestore = inject(Firestore);
   auth: Auth = inject(Auth);
   stockData: Observable<DocumentData>;
@@ -29,10 +31,12 @@ export class HomeComponent {
   userPortfolio: any;
   userPortfolioReference?: CollectionReference;
   portfolioStocks: any[] = [];
+  @ViewChild(MatTable) table?: MatTable<any>;
 
   constructor(
     public dialog: MatDialog,
     private renderer: Renderer2,
+    private myMath: MathService,
   ){
     authState(this.auth).subscribe(user =>{
       if(user){
@@ -65,10 +69,25 @@ export class HomeComponent {
   }
 
   fetchStockData(){
-    console.log(this.portfolioStocks)
     for(let i = 0; i < this.portfolioStocks.length; i++) {
-    }
-  }
+      const tempRef = doc(this.fs, `stock data/${this.portfolioStocks[i].ticker}`);
+      const tempData = docData(tempRef);
+      tempData.subscribe(stocks =>{
+        this.portfolioStocks[i] = {
+          ...stocks,
+          weight: this.portfolioStocks[i].weight,
+        };
+      });
+      tempData.subscribe(stocks =>{
+        this.portfolioStocks[i] = {
+          ...stocks,
+          risk: this.myMath.std(this.portfolioStocks[i].monthlyReturns),
+          return: this.myMath.avg(this.portfolioStocks[i].monthlyReturns),
+        };
+        this.table?.renderRows();
+      });
+    };
+  };
 
   logIn(){
     const provider = new GoogleAuthProvider();
