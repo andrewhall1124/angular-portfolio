@@ -32,13 +32,13 @@
 <div class="flex w-full justify-around px-6 py-4 gap-4 flex-col md:flex-row">
 
   <!-- Left -->
-  <div>
+  <div class="mat-elevation-z8">
     <mat-card class="w-full min-w-[50%]">
       <mat-card-header>
         <h1>{{user?.displayName}}'s Portfolio</h1>
       </mat-card-header>
 
-      <table mat-table [dataSource]="portfolioStocks" class="mat-elevation-z8 ">
+      <table mat-table [dataSource]="portfolioStocks" class="max-w-[50%]">
   
         <ng-container matColumnDef="ticker">
           <th mat-header-cell *matHeaderCellDef> Ticker </th>
@@ -50,7 +50,7 @@
           <td mat-cell *matCellDef="let stock"> {{stock.weight}} </td>
         </ng-container>
   
-        <ng-container matColumnDef="company name">
+        <ng-container matColumnDef="longName">
           <th mat-header-cell *matHeaderCellDef> Company Name </th>
           <td mat-cell *matCellDef="let stock"> {{stock.longName}} </td>
         </ng-container>
@@ -67,13 +67,30 @@
 
         <ng-container matColumnDef="risk">
           <th mat-header-cell *matHeaderCellDef> Standard Deviation </th>
-          <td mat-cell *matCellDef="let stock"> {{stock.risk.toFixed(4)}} </td>
+          <td mat-cell *matCellDef="let stock"> {{stock.risk?.toFixed(4)}} </td>
         </ng-container>
 
         <ng-container matColumnDef="return">
           <th mat-header-cell *matHeaderCellDef> Return </th>
-          <td mat-cell *matCellDef="let stock"> {{stock.return.toFixed(4)}} </td>
+          <td mat-cell *matCellDef="let stock"> {{stock.return?.toFixed(4)}} </td>
         </ng-container>
+
+        <ng-container matColumnDef="button">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let stock">
+            <button mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button></td>
+        </ng-container>
+
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="editWeight()">
+            <mat-icon>money</mat-icon>
+            <span>Edit Weight</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>delete_outline</mat-icon>
+            <span>Delete</span>
+          </button>
+        </mat-menu>
       
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
@@ -82,7 +99,7 @@
   </div>
   
   <!-- Right -->
-  <mat-card class="w-full min-w-[50%] p-4 h-fit">
+  <mat-card class="min-w-[50%] p-4 h-fit">
     <canvas baseChart
       [data]="lineChartData"
       [options]="lineChartOptions"

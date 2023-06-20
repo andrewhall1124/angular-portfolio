@@ -18,7 +18,7 @@ import { MathService } from './services/math.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  displayedColumns: string[] = ['ticker', 'company name', 'sector', 'industry', 'risk', 'return','weight'];
+  displayedColumns: string[] = ['ticker', 'longName', 'sector', 'industry', 'risk', 'return','weight', 'button'];
   fs: Firestore = inject(Firestore);
   auth: Auth = inject(Auth);
   stockData: Observable<DocumentData>;
@@ -72,17 +72,22 @@ export class HomeComponent {
     for(let i = 0; i < this.portfolioStocks.length; i++) {
       const tempRef = doc(this.fs, `stock data/${this.portfolioStocks[i].ticker}`);
       const tempData = docData(tempRef);
+
+      //Get stock data
       tempData.subscribe(stocks =>{
         this.portfolioStocks[i] = {
           ...stocks,
-          weight: this.portfolioStocks[i].weight,
+          weight: this.portfolioStocks[i].weight, // Assign weight correctly
         };
       });
+
+      // Calculate Stats
       tempData.subscribe(stocks =>{
         this.portfolioStocks[i] = {
           ...stocks,
           risk: this.myMath.std(this.portfolioStocks[i].monthlyReturns),
           return: this.myMath.avg(this.portfolioStocks[i].monthlyReturns),
+          weight: this.portfolioStocks[i].weight,
         };
         this.table?.renderRows();
       });
@@ -120,6 +125,16 @@ export class HomeComponent {
       };
     }
   };
+
+  editWeight(){
+
+  }
+
+  deleteStock(){
+
+  }
+
+
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();

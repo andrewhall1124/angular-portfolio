@@ -25,6 +25,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatIconModule} from '@angular/material/icon';
+import {MatMenuModule} from '@angular/material/menu';
 
 //Components
 import { StockDialogComponent } from './stock-dialog/stock-dialog.component';
@@ -56,6 +58,8 @@ import { StockChartComponent } from './stock-chart/stock-chart.component';
     MatAutocompleteModule,
     ReactiveFormsModule,
     MatDialogModule,
+    MatIconModule,
+    MatMenuModule,
   ],
   providers: [
     ScreenTrackingService,UserTrackingService
