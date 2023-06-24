@@ -20,7 +20,8 @@ import { RemoveStockDialogComponent } from '../dialogs/remove-stock-dialog/remov
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  displayedColumns: string[] = ['ticker', 'longName', 'sector', 'risk', 'return','weight', 'button'];
+  stockColumns: string[] = ['ticker', 'longName', 'sector', 'risk', 'return','weight', 'button'];
+  portfolioColumns: string[] = ['count','risk', 'return','weight'];
   fs: Firestore = inject(Firestore);
   auth: Auth = inject(Auth);
   stockData: Observable<DocumentData>;
@@ -34,6 +35,7 @@ export class HomeComponent {
   userPortfolioReference?: CollectionReference;
   portfolioStocks: any[] = [];
   @ViewChild(MatTable) table?: MatTable<any>;
+  portfolioSummary: any[] = [];
 
   constructor(
     public dialog: MatDialog,
@@ -92,9 +94,74 @@ export class HomeComponent {
           weight: this.portfolioStocks[i].weight,
         };
         this.table?.renderRows();
+        this.calcPortfolioSummary();
       });
     };
   };
+
+  calcPortfolioSummary(){
+    //Init  portfolio weight and count
+    let portfolioWeight = 0; //for iteration later
+    const portfolioCount = this.portfolioStocks.length;
+
+    //Init weightArray and returnArray
+    const weightArray = [];
+    const returnArray = [];
+    for(let i = 0; i < portfolioCount; i++){
+      weightArray[i] = this.portfolioStocks[i].weight;
+      returnArray[i] = this.portfolioStocks[i].return;
+    };
+
+    //Calc portfolio weight
+    for(let i = 0; i < portfolioCount; i++){
+      portfolioWeight += this.portfolioStocks[i].weight;
+    }
+
+    //Create covariance matrix
+    let covarianceMatrix = []
+    for(let i = 0; i < portfolioCount; i++){
+      const matrixRow = [];
+      for(let j = 0; j < portfolioCount; j++){
+        const stock1 = this.portfolioStocks[i].monthlyReturns;
+        const stock2 = this.portfolioStocks[j].monthlyReturns;  
+        const covariance = this.myMath.calculateCovariance(stock1,stock2);
+        matrixRow.push(covariance);
+      }
+      covarianceMatrix.push(matrixRow)
+    };
+
+    //Init weight matrix
+    const weightMatrix: number[][] = [];
+    for(let i = 0; i < weightArray.length; i++){
+      weightMatrix[i] = [weightArray[i]]
+    };
+
+    //Calculate risk
+    const resultMatrix = this.myMath.matrixMultiplication(covarianceMatrix, weightMatrix)
+    const resultArray: number[] = [];
+    for(let i = 0; i < resultMatrix.length; i++){
+      resultArray[i] = resultMatrix[i][0];
+    }
+
+    const portfolioRisk = this.myMath.sumProduct(weightArray, resultArray);
+
+    //Calc portfolio return
+    const portfolioReturn = this.myMath.sumProduct(weightArray,returnArray);
+    
+    this.portfolioSummary =[{
+      count: portfolioCount,
+      risk: portfolioRisk,
+      return: portfolioReturn,
+      weight: portfolioWeight,
+    }];
+    const docRef = doc(this.fs, `users/${this.user?.uid}/portfolios/My Portfolio`);
+    setDoc(docRef,{
+      count: portfolioCount,
+      risk: portfolioRisk,
+      return: portfolioReturn,
+      weight: portfolioWeight,
+    });
+  }
 
   logIn(){
     const provider = new GoogleAuthProvider();

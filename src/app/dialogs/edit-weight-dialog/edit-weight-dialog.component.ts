@@ -19,7 +19,7 @@ export class EditWeightDialogComponent {
     const docRef = doc(this.fs,`users/${this.user.uid}/portfolios/My Portfolio/stocks/${this.stock.ticker}`);
     updateDoc(docRef, {
       ...this.stock,
-      weight: this.stock.weight,
+      weight: Number(this.stock.weight),
     })
   }
 }
