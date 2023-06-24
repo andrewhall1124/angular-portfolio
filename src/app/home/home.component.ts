@@ -1,6 +1,6 @@
 import { Component, inject, Renderer2, OnInit, ViewChild  } from '@angular/core';
 import { ChartData } from 'chart.js';
-import { CollectionReference, Firestore, collection, collectionData, doc, docData, setDoc, DocumentData } from '@angular/fire/firestore';
+import { CollectionReference, Firestore, collection, collectionData, doc, docData, setDoc, DocumentData, deleteDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
@@ -13,7 +13,7 @@ import { Stock } from '../models/models';
 import { MatTable } from '@angular/material/table';
 import { MathService } from './services/math.service';
 import { EditWeightDialogComponent } from '../dialogs/edit-weight-dialog/edit-weight-dialog.component';
-import { MatMenuTrigger } from '@angular/material/menu';
+import { RemoveStockDialogComponent } from '../dialogs/remove-stock-dialog/remove-stock-dialog.component';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -137,8 +137,14 @@ export class HomeComponent {
     });
   }
 
-  deleteStock(){
-
+  removeStock(stock: any){
+    const dialogRef = this.dialog.open(RemoveStockDialogComponent, {
+      width: '300px',
+      data: {
+        stock: stock,
+        user: this.user,
+      }
+    })
   }
 
   testFunction(input: any){

@@ -33,6 +33,7 @@ import { FormsModule } from '@angular/forms';
 import { StockDialogComponent } from './dialogs/stock-dialog/stock-dialog.component';
 import { StockChartComponent } from './stock-chart/stock-chart.component';
 import { EditWeightDialogComponent } from './dialogs/edit-weight-dialog/edit-weight-dialog.component';
+import { RemoveStockDialogComponent } from './dialogs/remove-stock-dialog/remove-stock-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,6 +41,7 @@ import { EditWeightDialogComponent } from './dialogs/edit-weight-dialog/edit-wei
     StockDialogComponent,
     StockChartComponent,
     EditWeightDialogComponent,
+    RemoveStockDialogComponent,
   ],
   imports: [
     BrowserModule,
