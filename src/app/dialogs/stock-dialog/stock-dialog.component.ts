@@ -18,7 +18,6 @@ export class StockDialogComponent {
       @Inject(Firestore) private fs: Firestore,
     ) {
       this.stockData = docData(this.stockReference);
-      console.log(data);
     };
 
   addToPortfolio(){

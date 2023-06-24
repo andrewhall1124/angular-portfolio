@@ -23,20 +23,23 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import { ReactiveFormsModule } from '@angular/forms';
+import {ReactiveFormsModule} from '@angular/forms';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
+import { FormsModule } from '@angular/forms';
 
 //Components
-import { StockDialogComponent } from './stock-dialog/stock-dialog.component';
+import { StockDialogComponent } from './dialogs/stock-dialog/stock-dialog.component';
 import { StockChartComponent } from './stock-chart/stock-chart.component';
+import { EditWeightDialogComponent } from './dialogs/edit-weight-dialog/edit-weight-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     StockDialogComponent,
     StockChartComponent,
+    EditWeightDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,6 +63,7 @@ import { StockChartComponent } from './stock-chart/stock-chart.component';
     MatDialogModule,
     MatIconModule,
     MatMenuModule,
+    FormsModule,
   ],
   providers: [
     ScreenTrackingService,UserTrackingService

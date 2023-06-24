@@ -7,18 +7,20 @@ import { FormControl } from '@angular/forms';
 import { sp500 } from '../sp';
 import { User } from '@angular/fire/auth';
 import { MatDialog } from '@angular/material/dialog';
-import { StockDialogComponent } from '../stock-dialog/stock-dialog.component';
+import { StockDialogComponent } from '../dialogs/stock-dialog/stock-dialog.component';
 import { Auth, GoogleAuthProvider, signInWithPopup, authState, signOut } from '@angular/fire/auth';
 import { Stock } from '../models/models';
 import { MatTable } from '@angular/material/table';
 import { MathService } from './services/math.service';
+import { EditWeightDialogComponent } from '../dialogs/edit-weight-dialog/edit-weight-dialog.component';
+import { MatMenuTrigger } from '@angular/material/menu';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  displayedColumns: string[] = ['ticker', 'longName', 'sector', 'industry', 'risk', 'return','weight', 'button'];
+  displayedColumns: string[] = ['ticker', 'longName', 'sector', 'risk', 'return','weight', 'button'];
   fs: Firestore = inject(Firestore);
   auth: Auth = inject(Auth);
   stockData: Observable<DocumentData>;
@@ -126,12 +128,18 @@ export class HomeComponent {
     }
   };
 
-  editWeight(){
-
+  openEditWeightDialog(stock: any){
+    const dialogRef = this.dialog.open(EditWeightDialogComponent, {
+      data: stock,
+    });
   }
 
   deleteStock(){
 
+  }
+
+  testFunction(input: any){
+    console.log(input)
   }
 
 
