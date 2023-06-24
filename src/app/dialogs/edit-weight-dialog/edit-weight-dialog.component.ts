@@ -7,7 +7,8 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./edit-weight-dialog.component.css']
 })
 export class EditWeightDialogComponent {
-  weight: number = this.data.weight;
+  stock: any = this.data.stock;
+  user: any = this.data.user;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -15,11 +16,10 @@ export class EditWeightDialogComponent {
   ) {}
 
   updateWeight(){
-    console.log(this.data.ticker)
-    const docRef = doc(this.fs,`users/dCT5HCpNGcbdwON1dlAxz1kt3JO2/portfolios/My Portfolio/stocks/${this.data.ticker}`);
+    const docRef = doc(this.fs,`users/${this.user.uid}/portfolios/My Portfolio/stocks/${this.stock.ticker}`);
     updateDoc(docRef, {
-      ...this.data,
-      weight: this.weight,
+      ...this.stock,
+      weight: this.stock.weight,
     })
   }
 }

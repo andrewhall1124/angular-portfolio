@@ -130,7 +130,10 @@ export class HomeComponent {
 
   openEditWeightDialog(stock: any){
     const dialogRef = this.dialog.open(EditWeightDialogComponent, {
-      data: stock,
+      data: {
+        stock: stock,
+        user: this.user,
+      },
     });
   }
 
