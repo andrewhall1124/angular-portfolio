@@ -1,4 +1,3 @@
-import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -33,9 +32,11 @@ import {MatListModule} from '@angular/material/list';
 
 //Components
 import { StockDialogComponent } from './dialogs/stock-dialog/stock-dialog.component';
-import { StockChartComponent } from './stock-chart/stock-chart.component';
 import { EditWeightDialogComponent } from './dialogs/edit-weight-dialog/edit-weight-dialog.component';
 import { RemoveStockDialogComponent } from './dialogs/remove-stock-dialog/remove-stock-dialog.component';
+import { StockChartComponent } from './components/stock-chart/stock-chart.component';
+import { PortfoliosComponent } from './pages/portfolios/portfolios.component';
+import { HomeComponent } from './pages/home/home.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,6 +45,7 @@ import { RemoveStockDialogComponent } from './dialogs/remove-stock-dialog/remove
     StockChartComponent,
     EditWeightDialogComponent,
     RemoveStockDialogComponent,
+    PortfoliosComponent,
   ],
   imports: [
     BrowserModule,

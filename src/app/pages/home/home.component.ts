@@ -4,16 +4,15 @@ import { CollectionReference, Firestore, collection, collectionData, doc, docDat
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
-import { sp500 } from '../sp';
+import { sp500 } from 'src/app/sp';
 import { User } from '@angular/fire/auth';
 import { MatDialog } from '@angular/material/dialog';
-import { StockDialogComponent } from '../dialogs/stock-dialog/stock-dialog.component';
+import { StockDialogComponent } from 'src/app/dialogs/stock-dialog/stock-dialog.component';
 import { Auth, GoogleAuthProvider, signInWithPopup, authState, signOut } from '@angular/fire/auth';
-import { Stock } from '../models/models';
 import { MatTable } from '@angular/material/table';
-import { MathService } from './services/math.service';
-import { EditWeightDialogComponent } from '../dialogs/edit-weight-dialog/edit-weight-dialog.component';
-import { RemoveStockDialogComponent } from '../dialogs/remove-stock-dialog/remove-stock-dialog.component';
+import { MathService } from 'src/app/services/math.service';
+import { EditWeightDialogComponent } from 'src/app/dialogs/edit-weight-dialog/edit-weight-dialog.component';
+import { RemoveStockDialogComponent } from 'src/app/dialogs/remove-stock-dialog/remove-stock-dialog.component';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
