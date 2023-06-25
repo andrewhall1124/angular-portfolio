@@ -28,6 +28,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
 import { FormsModule } from '@angular/forms';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatListModule} from '@angular/material/list';
 
 //Components
 import { StockDialogComponent } from './dialogs/stock-dialog/stock-dialog.component';
@@ -66,6 +68,8 @@ import { RemoveStockDialogComponent } from './dialogs/remove-stock-dialog/remove
     MatIconModule,
     MatMenuModule,
     FormsModule,
+    MatSidenavModule,
+    MatListModule,
   ],
   providers: [
     ScreenTrackingService,UserTrackingService

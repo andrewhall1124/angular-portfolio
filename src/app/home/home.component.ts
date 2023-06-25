@@ -218,8 +218,6 @@ export class HomeComponent {
     console.log(input)
   }
 
-
-
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
