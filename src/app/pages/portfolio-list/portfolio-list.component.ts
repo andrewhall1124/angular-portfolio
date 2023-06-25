@@ -4,11 +4,11 @@ import { NewPortfolioDialogComponent } from 'src/app/dialogs/new-portfolio-dialo
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-portfolios',
-  templateUrl: './portfolios.component.html',
-  styleUrls: ['./portfolios.component.css']
+  selector: 'app-portfolio-list',
+  templateUrl: './portfolio-list.component.html',
+  styleUrls: ['./portfolio-list.component.css']
 })
-export class PortfoliosComponent {
+export class PortfolioListComponent {
   fs: Firestore = inject(Firestore);
   portfolioColumns: string[] = ['name','risk', 'return','sharpe'];
   portfolioCollection: CollectionReference = collection(this.fs, `users/dCT5HCpNGcbdwON1dlAxz1kt3JO2/portfolios`);

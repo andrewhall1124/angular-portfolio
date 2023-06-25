@@ -35,9 +35,9 @@ import { StockDialogComponent } from './dialogs/stock-dialog/stock-dialog.compon
 import { EditWeightDialogComponent } from './dialogs/edit-weight-dialog/edit-weight-dialog.component';
 import { RemoveStockDialogComponent } from './dialogs/remove-stock-dialog/remove-stock-dialog.component';
 import { StockChartComponent } from './components/stock-chart/stock-chart.component';
-import { PortfoliosComponent } from './pages/portfolios/portfolios.component';
 import { HomeComponent } from './pages/home/home.component';
 import { NewPortfolioDialogComponent } from './dialogs/new-portfolio-dialog/new-portfolio-dialog.component';
+import { PortfolioListComponent } from './pages/portfolio-list/portfolio-list.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,8 +46,8 @@ import { NewPortfolioDialogComponent } from './dialogs/new-portfolio-dialog/new-
     StockChartComponent,
     EditWeightDialogComponent,
     RemoveStockDialogComponent,
-    PortfoliosComponent,
     NewPortfolioDialogComponent,
+    PortfolioListComponent,
   ],
   imports: [
     BrowserModule,
