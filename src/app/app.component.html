@@ -1,1 +1,20 @@
+<mat-toolbar class="flex justify-between"> 
+  <span>
+    <a routerLink="" routerLinkActive="active">
+      💸Edward
+    </a>
+    <span>
+      <a routerLink="portfolios" routerLinkActive="active">
+        | Portfolios
+      </a>
+    </span>
+  </span>
+
+  <!-- When Logged Out -->
+  <button *ngIf="!user" (click)="logIn()">Log In</button>
+
+  <!-- When Logged In -->
+  <button *ngIf="user" (click)="logOut()">Log Out</button>
+
+</mat-toolbar>
 <router-outlet></router-outlet>

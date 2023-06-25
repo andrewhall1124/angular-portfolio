@@ -1,0 +1,12 @@
+<mat-card>
+  <div class="p-4 flex flex-col">
+    <h2>Create new portfolio?</h2>
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput type="text" [(ngModel)]="portfolioName">
+    </mat-form-field>
+    <button mat-raised-button mat-dialog-close color="accent" (click)="createPortfolio()">
+      Create
+    </button>
+  </div>
+</mat-card>

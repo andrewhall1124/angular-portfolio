@@ -1,1 +1,37 @@
-<p>portfolios works!</p>
+<!-- Portfolio Summary -->
+<div class="p-4">
+  <mat-card class="w-full min-w-[50%]">
+    <mat-card-header>
+      <div class=" w-full flex justify-between">
+        <h1>Portfolios</h1>
+        <button mat-raised-button color="accent" (click)="createNewPortfolio()">New</button>
+      </div>
+    </mat-card-header>
+  
+    <table mat-table [dataSource]="portfolios" class="max-w-[50%]">
+  
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let portfolio"> {{portfolio.name}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="risk">
+        <th mat-header-cell *matHeaderCellDef> Standard Deviation </th>
+        <td mat-cell *matCellDef="let portfolio"> {{portfolio.risk?.toFixed(4)}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="return">
+        <th mat-header-cell *matHeaderCellDef> Return </th>
+        <td mat-cell *matCellDef="let portfolio"> {{portfolio.return?.toFixed(4)}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="sharpe">
+        <th mat-header-cell *matHeaderCellDef> Sharpe </th>
+        <td mat-cell *matCellDef="let portfolio"> {{portfolio.weight.toFixed(4)}} </td>
+      </ng-container>
+    
+      <tr mat-header-row *matHeaderRowDef="portfolioColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: portfolioColumns;"></tr>
+    </table>
+  </mat-card>
+</div>
