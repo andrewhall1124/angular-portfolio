@@ -21,6 +21,6 @@ export class PortfoliosComponent {
   }
 
   createNewPortfolio(){
-    const dialogRef = this.dialog.open(NewPortfolioDialogComponent)
+    const dialogRef = this.dialog.open(NewPortfolioDialogComponent);
   }
 }
