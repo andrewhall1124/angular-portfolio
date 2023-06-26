@@ -226,7 +226,7 @@ export class PortfolioComponent {
 
   removeStock(stock: any){
     const dialogRef = this.dialog.open(RemoveStockDialogComponent, {
-      width: '300px',
+      width: '250px',
       data: {
         stock: stock,
         user: this.user,
