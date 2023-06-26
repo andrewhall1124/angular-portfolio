@@ -13,7 +13,7 @@
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef> Name </th>
         <td mat-cell *matCellDef="let portfolio"> 
-          <a routerLink=":id" routerLinkActive="active">
+          <a [routerLink]="['/portfolios', portfolio.id]" routerLinkActive="active">
             {{portfolio.name}} 
           </a>
         </td>
@@ -31,7 +31,7 @@
   
       <ng-container matColumnDef="sharpe">
         <th mat-header-cell *matHeaderCellDef> Sharpe </th>
-        <td mat-cell *matCellDef="let portfolio"> {{portfolio.weight.toFixed(4)}} </td>
+        <td mat-cell *matCellDef="let portfolio"> {{portfolio.sharpe?.toFixed(4)}} </td>
       </ng-container>
     
       <tr mat-header-row *matHeaderRowDef="portfolioColumns"></tr>

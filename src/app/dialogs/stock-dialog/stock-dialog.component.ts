@@ -11,7 +11,6 @@ import { Observable } from 'rxjs';
 export class StockDialogComponent {
   stockReference: DocumentReference = doc(this.fs, `stock data/${this.data.ticker}`);
   stockData: Observable<any>;
-  portfolioName: string = 'My Portfolio'; //temporary
 
   constructor(
       @Inject(MAT_DIALOG_DATA) public data: any,
@@ -21,7 +20,7 @@ export class StockDialogComponent {
     };
 
   addToPortfolio(){
-    setDoc(doc(this.fs, `users/${this.data.user}/portfolios/${this.portfolioName}/stocks/${this.data.ticker}`), {
+    setDoc(doc(this.fs, `users/${this.data.userId}/portfolios/${this.data.portfolioId}/stocks/${this.data.ticker}`), {
       ticker: this.data.ticker,
       weight: .2,
     });

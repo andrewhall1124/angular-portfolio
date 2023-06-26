@@ -1,4 +1,4 @@
-import { Component, inject, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CollectionReference, Firestore, collection, collectionData } from '@angular/fire/firestore';
 import { NewPortfolioDialogComponent } from 'src/app/dialogs/new-portfolio-dialog/new-portfolio-dialog.component';
 import { MatDialog } from '@angular/material/dialog';

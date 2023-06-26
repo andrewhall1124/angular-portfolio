@@ -38,6 +38,7 @@ import { StockChartComponent } from './components/stock-chart/stock-chart.compon
 import { HomeComponent } from './pages/home/home.component';
 import { NewPortfolioDialogComponent } from './dialogs/new-portfolio-dialog/new-portfolio-dialog.component';
 import { PortfolioListComponent } from './pages/portfolio-list/portfolio-list.component';
+import { PortfolioComponent } from './pages/portfolio/portfolio.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +49,7 @@ import { PortfolioListComponent } from './pages/portfolio-list/portfolio-list.co
     RemoveStockDialogComponent,
     NewPortfolioDialogComponent,
     PortfolioListComponent,
+    PortfolioComponent,
   ],
   imports: [
     BrowserModule,

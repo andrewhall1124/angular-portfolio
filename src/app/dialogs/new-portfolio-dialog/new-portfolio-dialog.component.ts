@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Firestore, collection, addDoc, DocumentReference, DocumentData } from '@angular/fire/firestore';
+import { Firestore, collection, setDoc, DocumentReference, DocumentData, doc, serverTimestamp } from '@angular/fire/firestore';
 @Component({
   selector: 'app-new-portfolio-dialog',
   templateUrl: './new-portfolio-dialog.component.html',
@@ -11,15 +11,18 @@ export class NewPortfolioDialogComponent {
   portfolioName: string = "";
   
   constructor(
-    private route: ActivatedRoute,
     private router: Router
   ){}
 
   createPortfolio(){
-    const collectionRef = collection(this.fs, `users/dCT5HCpNGcbdwON1dlAxz1kt3JO2/portfolios`)
-    addDoc(collectionRef, {
+    const collectionref = collection(this.fs, `users/dCT5HCpNGcbdwON1dlAxz1kt3JO2/portfolios`);
+    const docId = (doc(collectionref)).path.slice(-20);
+    const docRef = doc(this.fs, `users/dCT5HCpNGcbdwON1dlAxz1kt3JO2/portfolios/${docId}`);//temp user id
+    setDoc(docRef, {
       name: this.portfolioName,
+      id: docId,
+      created: serverTimestamp(),
     });
-    this.router.navigate([''])
+    this.router.navigate(['/portfolios', docId]);
   };
 }

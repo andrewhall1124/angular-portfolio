@@ -10,6 +10,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class RemoveStockDialogComponent {
   stock: any;
   user: any;
+  portfolio: any;
 
   constructor(
     @Inject(Firestore) private fs: Firestore,
@@ -17,10 +18,11 @@ export class RemoveStockDialogComponent {
   ) {
     this.stock = this.data.stock;
     this.user = this.data.user;
+    this.portfolio = this.data.portfolio;
   }
 
   deleteStock(){
-    const docRef = doc(this.fs,`users/${this.user?.uid}/portfolios/My Portfolio/stocks/${this.stock.ticker}`);
+    const docRef = doc(this.fs,`users/${this.user?.uid}/portfolios/${this.portfolio.id}/stocks/${this.stock.ticker}`);
     deleteDoc(docRef);
   }
 }
