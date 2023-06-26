@@ -152,7 +152,7 @@ export class PortfolioComponent {
       resultArray[i] = resultMatrix[i][0];
     }
 
-    const portfolioRisk = this.myMath.sumProduct(weightArray, resultArray);
+    const portfolioRisk = Math.sqrt(this.myMath.sumProduct(weightArray, resultArray));
 
     //Calc portfolio return
     const portfolioReturn = this.myMath.sumProduct(weightArray,returnArray);

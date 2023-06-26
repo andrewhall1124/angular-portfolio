@@ -53,7 +53,6 @@ export class MathService {
   }
 
   calculateCovariance(arr1: number[], arr2: number[]): number {
-
     const n = arr1.length;
     const mean1 = arr1.reduce((acc, val) => acc + val, 0) / n;
     const mean2 = arr2.reduce((acc, val) => acc + val, 0) / n;
