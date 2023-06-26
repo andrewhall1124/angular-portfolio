@@ -22,7 +22,7 @@
   <div>
     <mat-card class="w-full min-w-[50%]">
       <mat-card-header>
-        <!-- <h1>{{(portfolioData | async).name}} Holdings</h1> -->
+        <h1><em>{{(portfolioObservable | async).name}}</em> Holdings</h1>
       </mat-card-header>
   
       <table mat-table [dataSource]="portfolioStocks" class="max-w-[50%]">
