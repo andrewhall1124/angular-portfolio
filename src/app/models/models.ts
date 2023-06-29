@@ -1,3 +1,5 @@
+import { Timestamp } from "@angular/fire/firestore";
+
 export interface Stock{
   close: number[];
   dailyReturns: number[];
@@ -19,5 +21,12 @@ export interface User {
 }
 
 export interface Portfolio {
-  
+  count: number;
+  name: string,
+  created: Timestamp;
+  id: string;
+  return: number;
+  risk: number;
+  sharpe: number;
+  weight: number;
 }

@@ -39,6 +39,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { NewPortfolioDialogComponent } from './dialogs/new-portfolio-dialog/new-portfolio-dialog.component';
 import { PortfolioListComponent } from './pages/portfolio-list/portfolio-list.component';
 import { PortfolioComponent } from './pages/portfolio/portfolio.component';
+import { RenamePortfolioDialogComponent } from './dialogs/rename-portfolio-dialog/rename-portfolio-dialog.component';
+import { DeletePortfolioDialogComponent } from './dialogs/delete-portfolio-dialog/delete-portfolio-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,6 +52,8 @@ import { PortfolioComponent } from './pages/portfolio/portfolio.component';
     NewPortfolioDialogComponent,
     PortfolioListComponent,
     PortfolioComponent,
+    RenamePortfolioDialogComponent,
+    DeletePortfolioDialogComponent,
   ],
   imports: [
     BrowserModule,
